@@ -49,9 +49,9 @@ def find_days(string_list):
         date = re.findall('[0-9]{1,2}\W[0-9]{1,2}\W[0-9]{4}', line)
     # loop through the found dates and only add the days to your empty list 
         for i in date:
-    #return the list of days
             values = i.split('/')
             lst.append(values[1])
+    #return the list of days
     return lst
 
 def find_domains(string_list):

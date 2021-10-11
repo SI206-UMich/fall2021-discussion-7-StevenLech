@@ -36,7 +36,6 @@ def find_word(string_list):
     #return the list of all words that start with the letter B, E, or T
     return lst
 
-
 def find_days(string_list):
     """ Return a list of days from the list of strings the dates format in the text are MM/DD/YYYY. """  
 
@@ -63,18 +62,20 @@ def find_domains(string_list):
     # define the regular expression
 
     # loop through each line of the string list
-
+    for line in string_list:
     # find all the domains that match the regular expression in each line
-
+        domain = re.findall('[a-z]*:\W{2}[a-z].*\w', line)
     # loop through the found domains
-
+        for i in domain:
     # get the domain name by splitting the (//) after the https or http to get the website name
     # then strip the www. to get only the domain name
-
+            values = i.split('//')
+            domain_name = values[1]
+            domain_name = domain_name.strip("www.")
     # add the domains to your empty list
-    
+            lst.append(domain_name)
     #return the list of domains
-    pass
+    return lst
 
 class TestAllMethods(unittest.TestCase):
 
@@ -95,7 +96,7 @@ class TestAllMethods(unittest.TestCase):
         # read the lines from the file into a list of strings
         string_list = read_file('alice_ch_1.txt')
         domain_list = find_domains(string_list)
-        #self.assertEqual(domain_list,['pythex.org', 'si.umich.edu', 'sabapivot.com', 'stars.chromeexperiments.com', 'theofficestaremachine.com', 'regex101.com'])
+        self.assertEqual(domain_list,['pythex.org', 'si.umich.edu', 'sabapivot.com', 'stars.chromeexperiments.com', 'theofficestaremachine.com', 'regex101.com'])
 
 
 def main():
